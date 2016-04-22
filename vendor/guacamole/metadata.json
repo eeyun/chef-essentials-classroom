@@ -1,0 +1,34 @@
+{
+  "name": "guacamole",
+  "description": "Installs/Configures guacamole",
+  "long_description": "Installs/Configures guacamole-server, an HTML5 remote desktop client thing",
+  "maintainer": "Matt Stratton",
+  "maintainer_email": "mattstratton@chef.io",
+  "license": "Apache 2.0",
+  "platforms": {
+  },
+  "dependencies": {
+    "tomcat": ">= 0.0.0",
+    "java": "~> 1.31.0",
+    "apt": ">= 0.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "0.1.1",
+  "source_url": "",
+  "issues_url": ""
+}

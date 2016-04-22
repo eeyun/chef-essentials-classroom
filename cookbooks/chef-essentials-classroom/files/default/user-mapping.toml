@@ -1,0 +1,7 @@
+[template]
+src = "user-mapping.xml.tmpl"
+dest = "/etc/guacamole/user-mapping.xml"
+keys = [
+  "/students",
+  "/workstations"
+]

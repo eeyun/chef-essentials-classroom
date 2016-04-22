@@ -1,0 +1,29 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": "",
+    "ec2_keypair_name": "",
+    "ec2_keypair_file": ""
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "ssh_pty": true,
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "ssh_keypair_name": "{{user `ec2_keypair_name`}}",
+    "ssh_private_key_file": "{{user `ec2_keypair_file`}}",
+    "region": "us-east-1",
+    "instance_type": "m3.medium",
+    "source_ami": "ami-bc8131d4",
+    "ssh_username": "root",
+    "ami_name": "Test Chef Workstation - CentOS 6.7 - 0.3.1"
+  }],
+
+  "provisioners": [{
+    "type": "chef-solo",
+    "install_command": "curl -L https://www.chef.io/chef/install.sh | {{if .Sudo}}sudo{{end}} bash -s",
+    "cookbook_paths": ["../vendor"],
+    "run_list": ["chef-essentials-classroom::build-chef-workstation"]
+
+  }]
+}

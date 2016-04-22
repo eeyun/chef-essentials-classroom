@@ -1,0 +1,32 @@
+<user-mapping>
+<% @usermap.each do |user, userdata| -%>
+  <authorize username="<%= userdata['name'] -%>" password="<%= userdata['password'] -%>">
+  <% unless userdata['machines'].empty? -%>
+    <% userdata['machines'].each do |type, settings| -%>
+      <% unless settings.nil? -%>
+        <connection name="<%= userdata['name'] + "-" + type -%>">
+          <% if settings['platform_family'] == 'windows' %>
+        <protocol>rdp</protocol>
+          <% else -%>
+        <protocol>ssh</protocol>
+          <% end -%>
+        <param name="hostname"><%= settings['ec2']['local_hostname'] -%></param>
+          <% if settings['platform_family'] == 'windows' %>
+        <param name="port">3389</param>
+          <% else -%>
+        <param name="port">22</param>
+          <% end -%>
+        <param name="username"><%= settings['guacamole_user'] -%></param>
+          <% if settings['guacamole_key'] -%>
+        <param name="private-key"><% File.open(settings['guacamole_key']).readlines.each do |line| -%><%= line %><% end -%></param>
+          <% else -%>
+        <param name="password"><%= settings['guacamole_pass'] -%></param>
+          <% end -%>
+        <param name="ignore-cert">true</param>
+        </connection>
+      <% end -%>
+    <% end -%>
+  <% end -%>
+  </authorize>
+<% end -%>
+</user-mapping>

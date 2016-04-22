@@ -1,0 +1,38 @@
+{
+  "name": "chef-essentials-classroom",
+  "description": "Configures Servers for Chef Essentials Classroom",
+  "long_description": "Configures Servers for Chef Essentials Classroom",
+  "maintainer": "Ian Henry",
+  "maintainer_email": "ihenry@chef.io",
+  "license": "all_rights",
+  "platforms": {
+  },
+  "dependencies": {
+    "chef-ingredient": ">= 0.0.0",
+    "docker": ">= 0.0.0",
+    "yum-epel": ">= 0.0.0",
+    "apt": ">= 0.0.0",
+    "guacamole": ">= 0.0.0",
+    "etcd": ">= 0.0.0",
+    "confd": ">= 0.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "1.3.0",
+  "source_url": "",
+  "issues_url": ""
+}

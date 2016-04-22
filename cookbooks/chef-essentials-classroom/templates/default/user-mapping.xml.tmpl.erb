@@ -1,0 +1,16 @@
+<user-mapping>
+{{range $dir := lsdir "/students"}}
+<authorize username="{{base $dir}}" password="chef">
+  {{range $workstation := lsdir "/workstations"}}
+  {{$workdir := printf "/workstations/%s/*" $workstation}}{{range  gets $workdir}}
+  <connection name="{{base $workstation}}">
+  <protocol>ssh</protocol>
+  <param name="hostname">{{$data := json .Value}}{{$data.IP}}</param>
+  <param name="port">22</param>
+  <param name="username">chef</param>
+  <param name="password">chef</param>
+  </connection>
+  {{end}}{{end}}
+</authorize>
+{{end}}
+</user-mapping>
