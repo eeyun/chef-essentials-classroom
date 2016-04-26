@@ -1,5 +1,11 @@
 # Change Log
 =================
+## v0.9 (2016-04-26)
+=================
+### Implemented
+- Added file transfer support
+
+=================
 ## v0.8 (2016-04-22)
 =================
 ### Implemented
