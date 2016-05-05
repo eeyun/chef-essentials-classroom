@@ -27,6 +27,7 @@ package main
 import (
 	"log"
 	"fmt"
+  "os"
 	"time"
 
 	"golang.org/x/net/context"
@@ -37,17 +38,32 @@ import (
 )
 
 func main() {
-  c := cli.NewCLI("mealsonwheels", "1.0.0")
-   c.Args = os.Args[1:]
-   c.Commands = map[string]cli.CommandFactory{
-       "create": createCommandFactory,
-       "destroy": destroyCommandFactory,
-   }
+	// Get the command line arguments.
+	args := os.Args[1:]
+	for _, arg := range args {
+		if arg == "--" {
+			break
+		}
+		if arg == "-v" || arg == "--version" {
+			newArgs := make([]string, len(args)+1)
+			newArgs[0] = "version"
+			copy(newArgs[1:], args)
+			args = newArgs
+			break
+		}
+	}
 
-   exitStatus, err := c.Run()
-   if err != nil {
-       log.Println(err)
-   }
+	cli := &cli.CLI{
+		Args:     args,
+		Commands: Commands,
+		HelpFunc: cli.BasicHelpFunc("mealsonwheels"),
+	}
 
-   os.Exit(exitStatus)
+	exitCode, err := cli.Run()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error executing CLI: %s\n", err.Error())
+		return 1
+	}
+
+	return exitCode
 }
