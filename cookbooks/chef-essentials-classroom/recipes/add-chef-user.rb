@@ -5,25 +5,32 @@
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
 # Create user 'chef' with password 'chef' for student use
-user 'chef' do
+user 'example' do
   action :create
   comment 'Chef Boyardee'
-  home '/home/chef'
+  home '/home/example'
   shell '/bin/bash'
-  password 'chef'
-  supports :manage_home => true
+  password 'example'
+  supports manage_home: true
+end
+
+directory '/home/example' do
+  owner 'example'
+  group 'example'
+  mode 00755
+  action :create
 end
 
 # Setup 'chef' users .bash_profile
-template '/home/chef/.bash_profile' do
+template '/home/example/.bash_profile' do
   source 'chef-bash-profile.erb'
-  owner 'chef'
-  group 'chef'
+  owner 'example'
+  group 'example'
   mode '0644'
 end
 
 execute 'reset chef password' do
-  command 'echo "chef:chef"|chpasswd && touch /tmp/pass_updated'
+  command 'echo "example:example"|chpasswd && touch /tmp/pass_updated'
   not_if ::File.exist?('/tmp/pass_updated')
 end
 

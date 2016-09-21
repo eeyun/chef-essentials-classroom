@@ -11,22 +11,14 @@ provisioner:
 #   name: inspec
 
 platforms:
-  - name: centos-6.7
+  - name: ubuntu-14.04
     driver:
-      require_chef_omnibus: true
+      provider: libvirt
+      box: ubuntu14.04
       network:
-        - ["public_network", {bridge: 'en0: Wi-Fi (AirPort)'}]
-        - ["forwarded_port",{ guest: 2379, host: 5379}]
-        - ["forwarded_port",{ guest: 2380, host: 5380}]
-        - ["forwarded_port",{ guest: 4001, host: 6001}]
-        - ["forwarded_port",{ guest: 7001, host: 9001}]
         - ["forwarded_port",{ guest: 8080, host: 8080}]
 suites:
   - name: server
     run_list:
-      - recipe[chef-essentials-classroom::install-etcd]
-    attributes:
-  - name: client
-    run_list:
-      - recipe[chef-essentials-classroom::build-chef-workstation]
+      - recipe[chef-essentials-classroom::build-guac-server]
     attributes:
